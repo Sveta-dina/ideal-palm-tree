@@ -1,0 +1,33 @@
+# Large files
+photos/originals/*.jpg
+photos/originals/*.png
+photos/originals/*.webp
+photos/thumbnails/*.jpg
+photos/thumbnails/*.png
+photos/thumbnails/*.webp
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log

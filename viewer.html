@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архив фотографий заброшенных психиатрических больниц</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls input,
+        .controls select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .controls input:focus,
+        .controls select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .photo-image {
+            width: 100%;
+            height: 200px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 3em;
+        }
+
+        .photo-info {
+            padding: 15px;
+        }
+
+        .photo-info h3 {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .photo-info p {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .photo-location {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .photo-year {
+            color: #764ba2;
+            font-weight: 500;
+        }
+
+        .tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+        }
+
+        .empty-state h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .stat-item {
+            display: inline-block;
+            margin-right: 30px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #333;
+            background: none;
+            border: none;
+        }
+
+        .modal-close:hover {
+            color: #667eea;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .modal-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .detail-group h4 {
+            color: #667eea;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .modal-details {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏚️ Архив заброшенных больниц</h1>
+            <p>Фотографии психиатрических учреждений со всего мира</p>
+        </header>
+
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Поиск по названию или местоположению...">
+            <select id="countryFilter">
+                <option value="">Все страны</option>
+            </select>
+            <select id="yearFilter">
+                <option value="">Все годы закрытия</option>
+            </select>
+        </div>
+
+        <div id="gallery" class="gallery"></div>
+
+        <div id="emptyState" class="empty-state">
+            <h2>📷 Архив пока пуст</h2>
+            <p>Фотографии появятся здесь после добавления в каталог</p>
+        </div>
+
+        <div id="stats" class="stats" style="display: none;">
+            <h3>Статистика архива</h3>
+            <div id="statsContent"></div>
+        </div>
+    </div>
+
+    <div id="photoModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-body">
+                <div id="modalImage" class="modal-image"></div>
+                <div id="modalDetails" class="modal-details"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allPhotos = [];
+
+        async function loadCatalog() {
+            try {
+                const response = await fetch('metadata/catalog.json');
+                const data = await response.json();
+                allPhotos = data.photos || [];
+                renderGallery(allPhotos);
+                updateFilters();
+                updateStats();
+            } catch (error) {
+                console.error('Error loading catalog:', error);
+            }
+        }
+
+        function renderGallery(photos) {
+            const gallery = document.getElementById('gallery');
+            const emptyState = document.getElementById('emptyState');
+
+            if (photos.length === 0) {
+                gallery.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            gallery.innerHTML = photos.map(photo => `
+                <div class="photo-card" onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')})">
+                    <div class="photo-image">📷</div>
+                    <div class="photo-info">
+                        <h3 title="${photo.title}">${photo.title}</h3>
+                        <p class="photo-location">${photo.location.city}, ${photo.location.region}</p>
+                        <p class="photo-year">Закрыта: ${photo.year_closed}</p>
+                        <div class="tags">
+                            ${photo.tags.slice(0, 2).map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateFilters() {
+            const countries = [...new Set(allPhotos.map(p => p.location.country))].sort();
+            const years = [...new Set(allPhotos.map(p => p.year_closed))].sort().reverse();
+
+            const countryFilter = document.getElementById('countryFilter');
+            const yearFilter = document.getElementById('yearFilter');
+
+            countries.forEach(country => {
+                countryFilter.innerHTML += `<option value="${country}">${country}</option>`;
+            });
+
+            years.forEach(year => {
+                yearFilter.innerHTML += `<option value="${year}">${year}</option>`;
+            });
+        }
+
+        function updateStats() {
+            if (allPhotos.length === 0) {
+                document.getElementById('stats').style.display = 'none';
+                return;
+            }
+
+            const countries = new Set(allPhotos.map(p => p.location.country));
+            const statsContent = document.getElementById('statsContent');
+
+            statsContent.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-value">${allPhotos.length}</div>
+                    <div class="stat-label">Фотографий</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${countries.size}</div>
+                    <div class="stat-label">Стран</div>
+                </div>
+            `;
+
+            document.getElementById('stats').style.display = 'block';
+        }
+
+        function filterPhotos() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const country = document.getElementById('countryFilter').value;
+            const year = document.getElementById('yearFilter').value;
+
+            const filtered = allPhotos.filter(photo => {
+                const matchSearch = photo.title.toLowerCase().includes(search) ||
+                                  photo.location.city.toLowerCase().includes(search);
+                const matchCountry = !country || photo.location.country === country;
+                const matchYear = !year || photo.year_closed.toString() === year;
+
+                return matchSearch && matchCountry && matchYear;
+            });
+
+            renderGallery(filtered);
+        }
+
+        function openModal(photo) {
+            const modal = document.getElementById('photoModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalDetails = document.getElementById('modalDetails');
+
+            modalImage.innerHTML = '📷';
+
+            modalDetails.innerHTML = `
+                <div>
+                    <h2>${photo.title}</h2>
+                    <div class="detail-group">
+                        <h4>Описание</h4>
+                        <p>${photo.description}</p>
+                    </div>
+                    <div class="detail-group">
+                        <h4>Местоположение</h4>
+                        <p>${photo.location.city}, ${photo.location.region}, ${photo.location.country}</p>
+                    </div>
+                    <div class="detail-group">
+                        <h4>Годы</h4>
+                        <p>Построена: ${photo.year_built}<br>Закрыта: ${photo.year_closed}</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="detail-group">
+                        <h4>Фотограф</h4>
+                        <p>${photo.photographer}</p>
+                    </div>
+                    <div class="detail-group">
+                        <h4>Дата съемки</h4>
+                        <p>${photo.date_taken}</p>
+                    </div>
+                    <div class="detail-group">
+                        <h4>Лицензия</h4>
+                        <p>${photo.license}</p>
+                    </div>
+                    <div class="detail-group">
+                        <h4>Теги</h4>
+                        <div class="tags">
+                            ${photo.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('photoModal').classList.remove('active');
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', filterPhotos);
+        document.getElementById('countryFilter').addEventListener('change', filterPhotos);
+        document.getElementById('yearFilter').addEventListener('change', filterPhotos);
+
+        // Close modal on background click
+        document.getElementById('photoModal').addEventListener('click', (e) => {
+            if (e.target.id === 'photoModal') closeModal();
+        });
+
+        // Load catalog on page load
+        loadCatalog();
+    </script>
+</body>
+</html>

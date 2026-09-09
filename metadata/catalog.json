@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-09-09",
+  "total_photos": 0,
+  "photos": [
+    {
+      "id": "example_001",
+      "title": "Example Abandoned Hospital",
+      "location": {
+        "country": "Country Name",
+        "region": "Region/State",
+        "city": "City Name"
+      },
+      "year_closed": 2020,
+      "year_built": 1950,
+      "filename": "example_001.jpg",
+      "thumbnail": "example_001_thumb.jpg",
+      "description": "Description of the photo",
+      "photographer": "Photographer Name",
+      "date_taken": "2023-01-15",
+      "image_info": {
+        "width": 3000,
+        "height": 2000,
+        "file_size_kb": 2048,
+        "format": "jpg"
+      },
+      "tags": ["building", "interior", "windows"],
+      "license": "CC BY-NC-SA 4.0",
+      "source_url": ""
+    }
+  ]
+}

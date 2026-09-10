@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egypt Mysteries Slideshow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .slideshow-container {
+            max-width: 1400px;
+            width: 100%;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .slides {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(20, 10, 40, 0.8);
+            border-top: 2px solid rgba(212, 175, 55, 0.3);
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #d4af37;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #f0e68c;
+            transform: scale(1.05);
+        }
+
+        .slide-counter {
+            color: #d4af37;
+            font-size: 18px;
+            font-weight: bold;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .dots {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #d4af37;
+        }
+
+        .dot.active {
+            background: #d4af37;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .slide-counter {
+                font-size: 14px;
+                min-width: 80px;
+            }
+
+            .controls {
+                padding: 15px 20px;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <div class="slides">
+            <!-- Slide 1: Aliens Built Pyramids -->
+            <div class="slide active">
+                <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3IgMeQMk8nvK4owPeWgQ4J4F9Xe/hf_20260910_124129_04224235-9bb6-42e6-9b48-a0fc102f489b.png" alt="How Aliens Built Pyramids">
+            </div>
+
+            <!-- Slide 2: Pyramid Construction -->
+            <div class="slide">
+                <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3IgMeQMk8nvK4owPeWgQ4J4F9Xe/hf_20260910_124524_ab7753b8-de4f-499d-ba27-927baf2ad634.png" alt="Laser Cutting">
+            </div>
+
+            <!-- Slide 3: Gravitational Fields -->
+            <div class="slide">
+                <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3IgMeQMk8nvK4owPeWgQ4J4F9Xe/hf_20260910_124527_3863ff6a-7673-43c0-9dd7-39311c66db71.png" alt="Gravitational Fields">
+            </div>
+
+            <!-- Slide 4: Air Transport -->
+            <div class="slide">
+                <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3IgMeQMk8nvK4owPeWgQ4J4F9Xe/hf_20260910_124543_85e9ac7e-ef93-4c26-8647-c18d91ae6530.png" alt="Flying Blocks">
+            </div>
+
+            <!-- Slide 5: Completed Pyramids -->
+            <div class="slide">
+                <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3IgMeQMk8nvK4owPeWgQ4J4F9Xe/hf_20260910_124545_80c03835-d5c3-4e5e-bc63-53cf0479d96c.png" alt="Completed Pyramids">
+            </div>
+
+            <!-- Slide 6: Temple Philae Tools -->
+            <div class="slide">
+                <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3IgMeQMk8nvK4owPeWgQ4J4F9Xe/hf_20260910_125739_15dfe686-a9a3-4777-a639-193c891c59cd.png" alt="Temple Philae">
+            </div>
+
+            <!-- Slide 7: Philae with Artifacts -->
+            <div class="slide">
+                <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3IgMeQMk8nvK4owPeWgQ4J4F9Xe/hf_20260910_131201_7c745f77-3c4f-4e71-85b7-0f903d4fd1e6.png" alt="Temple Artifacts">
+            </div>
+
+            <!-- Slide 8: Eternal Secrets -->
+            <div class="slide">
+                <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3IgMeQMk8nvK4owPeWgQ4J4F9Xe/hf_20260910_132454_854dcb1b-e15e-48f2-8872-bea713415aa3.png" alt="Eternal Secrets">
+            </div>
+
+            <!-- Slide 9: Pyramids with English Description -->
+            <div class="slide">
+                <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3IgMeQMk8nvK4owPeWgQ4J4F9Xe/hf_20260910_131620_7014bb50-9023-4601-9ded-c63b3940ba9b.png" alt="English Description">
+            </div>
+
+            <!-- Slide 10: Alien Construction English -->
+            <div class="slide">
+                <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3IgMeQMk8nvK4owPeWgQ4J4F9Xe/hf_20260910_131952_e02e65bf-b6d5-4eb9-9474-3e7333cbc23d.png" alt="Alien Construction">
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="previousSlide()">◀ PREVIOUS</button>
+            <div class="dots" id="dotsContainer"></div>
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+            </div>
+            <button onclick="nextSlide()">NEXT ▶</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Create dots
+        const dotsContainer = document.getElementById('dotsContainer');
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+
+            slides[n].classList.add('active');
+            document.querySelectorAll('.dot')[n].classList.add('active');
+            document.getElementById('currentSlide').textContent = n + 1;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>

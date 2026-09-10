@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Храм Филе: Врата в Другие Миры</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a0f2e 50%, #0f1a3e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(10, 10, 30, 0.98);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 50px 150px rgba(0, 0, 0, 0.95), 0 0 100px rgba(100, 180, 255, 0.15);
+            border: 3px solid rgba(100, 180, 255, 0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, rgba(100, 180, 255, 0.25) 0%, rgba(0, 100, 200, 0.15) 100%);
+            padding: 50px 40px;
+            border-bottom: 3px solid rgba(100, 180, 255, 0.4);
+            text-align: center;
+        }
+
+        .title {
+            font-size: 56px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #64b4ff 0%, #a0d8ff 50%, #4a9fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 50px rgba(100, 180, 255, 0.3);
+        }
+
+        .subtitle {
+            font-size: 22px;
+            color: #a0d8ff;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .image-section {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(to bottom,
+                rgba(100, 150, 255, 0.3) 0%,
+                rgba(100, 180, 200, 0.2) 30%,
+                rgba(210, 166, 121, 0.2) 60%,
+                rgba(180, 120, 80, 0.2) 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(100, 150, 255, 0.4);
+            font-size: 20px;
+            text-align: center;
+            font-weight: 700;
+            padding: 40px;
+        }
+
+        .content-section {
+            padding: 60px 50px;
+            background: linear-gradient(135deg, rgba(20, 10, 40, 0.9) 0%, rgba(15, 15, 35, 0.95) 100%);
+        }
+
+        .section-title {
+            font-size: 44px;
+            color: #64b4ff;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 900;
+            text-shadow: 0 3px 20px rgba(100, 180, 255, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(100, 180, 255, 0.2) 0%, rgba(0, 100, 200, 0.1) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(100, 180, 255, 0.4);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #64b4ff;
+            box-shadow: 0 0 30px rgba(100, 180, 255, 0.4);
+            transform: translateY(-8px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .feature-title {
+            color: #64b4ff;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .feature-text {
+            color: #a0d8ff;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .main-description {
+            background: linear-gradient(135deg, rgba(100, 180, 255, 0.15) 0%, rgba(0, 100, 200, 0.1) 100%);
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 6px solid #64b4ff;
+            margin-bottom: 40px;
+        }
+
+        .main-description-text {
+            color: #d8e8ff;
+            font-size: 17px;
+            line-height: 1.9;
+            text-align: justify;
+        }
+
+        .highlight {
+            color: #64b4ff;
+            font-weight: 700;
+        }
+
+        .mystical-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            background: rgba(10, 5, 30, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(100, 180, 255, 0.3);
+        }
+
+        .mystical-table th {
+            background: rgba(100, 180, 255, 0.2);
+            color: #64b4ff;
+            padding: 20px;
+            text-align: left;
+            font-weight: 800;
+            border-bottom: 2px solid rgba(100, 180, 255, 0.4);
+        }
+
+        .mystical-table td {
+            color: #a0d8ff;
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(100, 180, 255, 0.2);
+        }
+
+        .mystical-table tr:hover {
+            background: rgba(100, 180, 255, 0.1);
+        }
+
+        .rituals-section {
+            background: rgba(10, 5, 20, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid rgba(100, 180, 255, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .rituals-title {
+            color: #64b4ff;
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .ritual-item {
+            background: rgba(100, 180, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #64b4ff;
+            margin-bottom: 15px;
+        }
+
+        .ritual-time {
+            color: #64b4ff;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .ritual-description {
+            color: #90c8ff;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .cosmic-box {
+            background: linear-gradient(135deg, rgba(100, 180, 255, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+            padding: 35px;
+            border-radius: 15px;
+            border: 2px dashed rgba(100, 180, 255, 0.4);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cosmic-title {
+            color: #64b4ff;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .cosmic-text {
+            color: #a0d8ff;
+            font-size: 16px;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .footer {
+            background: rgba(100, 180, 255, 0.1);
+            padding: 30px;
+            text-align: center;
+            border-top: 2px solid rgba(100, 180, 255, 0.3);
+            margin-top: 40px;
+        }
+
+        .footer-text {
+            color: #64b4ff;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .footer-subtext {
+            color: #a0d8ff;
+            font-size: 15px;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">🔷 ХРАМ ФИЛЕ 🔷</div>
+            <div class="subtitle">Врата в Забытый Мир Смежных Реальностей</div>
+        </div>
+
+        <div class="image-section">
+            ⭐ Древние колонны храма Филе, вырезанные из кристаллизованной энергии<br/>
+            🌊 Река Нил, разделяющая миры<br/>
+            👑 Королева, спящая между жизнью и смертью<br/>
+            🔷 Кристаллы под землёй, передающие сигналы в Сириус<br/>
+            ✨ Врата в другие измерения
+        </div>
+
+        <div class="content-section">
+            <div class="section-title">✨ МИСТИЧЕСКИЕ ТАЙНЫ ХРАМА ✨</div>
+
+            <div class="main-description">
+                <div class="main-description-text">
+                    Храм Филе стоит на острове в Ниле, окруженный водой со всех сторон. Это не просто архитектурный памятник — это <span class="highlight">портальная конструкция, созданная древними жрецами для связи с потусторонними силами</span>. Колонны храма изнутри содержат кварцевые кристаллы, которые генерируют электромагнитное поле, совпадающее с частотой человеческого мозга (7.83 Гц). Это <span class="highlight">антенны для передачи мыслей и духов в другие измерения</span>. Вода вокруг храма — это не просто река. Она течёт одновременно в двух мирах: в нашей реальности это Нил с песком, а в параллельном измерении — река чистого света и сознания.
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔷</div>
+                    <div class="feature-title">Кристальные Колонны</div>
+                    <div class="feature-text">
+                        Внутри каждой колонны расположены кварцевые кристаллы в идеальных геометрических паттернах. Они излучают голубое свечение в темноте и генерируют мощное электромагнитное поле.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌊</div>
+                    <div class="feature-title">Река Между Мирами</div>
+                    <div class="feature-text">
+                        Нил вокруг храма резонирует с энергией кристаллов. Те, кто входит в храм через врата, пересекают границу между жизнью и смертью, материальным и духовным мирами.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👑</div>
+                    <div class="feature-title">Королева Клеопатра</div>
+                    <div class="feature-text">
+                        В подземных камерах хранится королева, консервированная между жизнью и смертью. Её сердце бьется 12 раз в минуту. Её мозг светится паттернами, невозможными для объяснения.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <div class="feature-title">Врата Сириуса</div>
+                    <div class="feature-text">
+                        На глубине 67 метров под песком находятся древние навигационные координаты. Сириус отмечен как врата в галактику, откуда пришли наши создатели. Храм передаёт сигналы туда.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎵</div>
+                    <div class="feature-title">Голос Нила</div>
+                    <div class="feature-text">
+                        Река поёт на языке математики универсума. В её звуках — истории древних цивилизаций, пророчества будущего и исцеляющая музыка богини Исиды.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <div class="feature-title">Ритуалы Пробуждения</div>
+                    <div class="feature-text">
+                        Три раза в год, в дни равноденствия, жрецы проводят Ритуалы Пробуждения Света. В эти ночи активируются все энергетические системы храма.
+                    </div>
+                </div>
+            </div>
+
+            <div class="rituals-section">
+                <div class="rituals-title">📅 НОЧНАЯ ПОСЛЕДОВАТЕЛЬНОСТЬ ПРОБУЖДЕНИЯ</div>
+
+                <div class="ritual-item">
+                    <div class="ritual-time">⏰ Полночь (00:00)</div>
+                    <div class="ritual-description">Все колонны начинают светиться ярче. Голубой свет распространяется по храму волной, заполняя весь остров Филе.</div>
+                </div>
+
+                <div class="ritual-item">
+                    <div class="ritual-time">⏰ 00:44</div>
+                    <div class="ritual-description">Вода в Ниле замерзает на месте, создавая прозрачный светящийся лёд. Температура окружающей среды остаётся +35°С, но вода отвергает естественные законы.</div>
+                </div>
+
+                <div class="ritual-item">
+                    <div class="ritual-time">⏰ 01:11</div>
+                    <div class="ritual-description">На стенах храма появляются голографические образы древних жрецов и богинь, которые исполняют священный танец вознесения духа.</div>
+                </div>
+
+                <div class="ritual-item">
+                    <div class="ritual-time">⏰ 02:22</div>
+                    <div class="ritual-description">Королева Клеопатра открывает глаза на несколько секунд. Её взгляд пронзает все семь измерений одновременно. Встретившие её взгляд получают откровение о своей истинной природе.</div>
+                </div>
+
+                <div class="ritual-item">
+                    <div class="ritual-time">⏰ 03:33</div>
+                    <div class="ritual-description">Всё возвращается в норму. Колонны перестают светиться. Лёд тает за несколько секунд. Люди просыпаются с воспоминаниями из других жизней.</div>
+                </div>
+            </div>
+
+            <div class="cosmic-box">
+                <div class="cosmic-title">🪐 ЭФФЕКТЫ ПРЕБЫВАНИЯ В ХРАМЕ 🪐</div>
+                <div class="cosmic-text">
+                    ✨ Улучшение памяти на 300%<br/>
+                    💫 Исцеление неизлечимых болезней<br/>
+                    👁️ Развитие экстрасенсорных способностей<br/>
+                    🧠 Духовное пробуждение и просветление<br/>
+                    🌟 Связь с параллельными жизнями и мирами
+                </div>
+            </div>
+
+            <table class="mystical-table">
+                <thead>
+                    <tr>
+                        <th>🔮 Аспект</th>
+                        <th>🌀 Тайна</th>
+                        <th>⭐ Смысл</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🏛️ Архитектура</td>
+                        <td>Колонны из кристаллизованной энергии</td>
+                        <td>Антенны для связи с космосом и другими мирами</td>
+                    </tr>
+                    <tr>
+                        <td>💧 Река</td>
+                        <td>Граница между мирами</td>
+                        <td>Нил течёт через 7 измерений одновременно</td>
+                    </tr>
+                    <tr>
+                        <td>👑 Королева</td>
+                        <td>Состояние между жизнью и смертью</td>
+                        <td>Видит сны о всех возможных будущих событиях</td>
+                    </tr>
+                    <tr>
+                        <td>⭐ Сириус</td>
+                        <td>Врата в другую галактику</td>
+                        <td>Инопланетные создатели находятся там</td>
+                    </tr>
+                    <tr>
+                        <td>🔷 Кристаллы</td>
+                        <td>На глубине 67 метров под песком</td>
+                        <td>Передатчик сигналов в космос и между мирами</td>
+                    </tr>
+                    <tr>
+                        <td>🎵 Вода</td>
+                        <td>Поёт на языке математики</td>
+                        <td>Исцеляет и передаёт пророчества богов</td>
+                    </tr>
+                    <tr>
+                        <td>🌙 Ритуалы</td>
+                        <td>Три раза в год в дни равноденствий</td>
+                        <td>Пробуждают силы древних богов и духов</td>
+                    </tr>
+                    <tr>
+                        <td>🌍 Позиция</td>
+                        <td>Центр энергетической сети Земли</td>
+                        <td>Связано со всеми другими святынями планеты</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="cosmic-box">
+                <div class="cosmic-title">🛸 СООБЩЕНИЕ ИЗ ПРОШЛОГО 🛸</div>
+                <div class="cosmic-text">
+                    В 2024 году произошло явление, которое древние жрецы предсказали: все древние храмы Египта одновременно активировались. Они запустили мощный энергетический импульс в космос, к Сириусу.<br/><br/>
+                    <strong>Сообщение простое: "Мы проснулись. Мы помним. Приходите домой."</strong><br/><br/>
+                    Сейчас над Египтом видны необычные огни в небе. Корабли с Сириуса приближаются. Они слышали зов и готовятся к возвращению.
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-text">
+                    🌟 ХРАМ ФИЛЕ — ВРАТА В БУДУЩЕЕ 🌟
+                </div>
+                <div class="footer-subtext">
+                    Это не просто памятник прошлого, а инструмент пробуждения, где сознание человека может подняться выше и увидеть истину о нашем месте во вселенной. Храм ждёт того дня, когда люди вернут себе древние знания и магические способности. Этот день близко.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

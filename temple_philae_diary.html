@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дневник Исследователя: Храм Филе</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #1a0a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(20, 10, 40, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 80px rgba(212, 175, 55, 0.15);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(180, 100, 40, 0.15) 100%);
+            padding: 40px;
+            border-bottom: 3px solid rgba(212, 175, 55, 0.4);
+            text-align: center;
+        }
+
+        .diary-title {
+            font-size: 42px;
+            color: #d4af37;
+            margin-bottom: 10px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 3px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .diary-subtitle {
+            font-size: 18px;
+            color: #c0a080;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .researcher-info {
+            color: #b0a080;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .entries-container {
+            padding: 40px;
+        }
+
+        .diary-entry {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(100, 50, 20, 0.05) 100%);
+            border-left: 5px solid #d4af37;
+            border-radius: 8px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-right: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .diary-entry:hover {
+            border-left-color: #f0e68c;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+            transform: translateX(5px);
+        }
+
+        .entry-date {
+            color: #d4af37;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .entry-time {
+            color: #b0a080;
+            font-size: 13px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .entry-content {
+            color: #e8d4b0;
+            line-height: 1.9;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .entry-highlight {
+            background: rgba(212, 175, 55, 0.15);
+            padding: 15px;
+            border-left: 3px solid #d4af37;
+            margin: 15px 0;
+            font-style: italic;
+            color: #f0e68c;
+        }
+
+        .entry-quote {
+            border-left: 4px solid #d4af37;
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #d4af37;
+            font-style: italic;
+            font-size: 16px;
+        }
+
+        .measurement {
+            background: rgba(212, 175, 55, 0.12);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            color: #f0e68c;
+            font-size: 13px;
+        }
+
+        .critical-moment {
+            background: rgba(212, 175, 55, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #d4af37;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .critical-moment .moment-title {
+            color: #d4af37;
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .timeline-event {
+            display: flex;
+            gap: 20px;
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(212, 175, 55, 0.08);
+            border-radius: 5px;
+        }
+
+        .timeline-time {
+            color: #d4af37;
+            font-weight: 700;
+            min-width: 80px;
+            font-size: 14px;
+        }
+
+        .timeline-desc {
+            color: #e8d4b0;
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .signature {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(212, 175, 55, 0.3);
+            text-align: right;
+            color: #b0a080;
+        }
+
+        .signature-name {
+            color: #d4af37;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .footer {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 2px solid rgba(212, 175, 55, 0.3);
+            color: #b0a080;
+        }
+
+        .footer-text {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .diary-title {
+                font-size: 28px;
+            }
+
+            .entries-container {
+                padding: 20px;
+            }
+
+            .diary-entry {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="diary-title">📖 ДНЕВНИК ИССЛЕДОВАТЕЛЯ</div>
+            <div class="diary-subtitle">Храм Филе: Раскрытие Мистических Тайн</div>
+            <div class="researcher-info">
+                📍 Остров Филе, Асуан, Египет | 🔬 Научное исследование | 👁️ Очевидец паранормальных явлений
+            </div>
+        </div>
+
+        <div class="entries-container">
+            <!-- ДЕНЬ 1 -->
+            <div class="diary-entry">
+                <div class="entry-date">🔷 ДЕНЬ 1 | 15 июня 2024</div>
+                <div class="entry-time">14:30 — Первый контакт</div>
+
+                <div class="entry-content">
+                    Я прибыла на остров Филе в полдень. Туристы разошлись, остались только охранники. Я ощущала странное электричество в воздухе с самого начала.
+                </div>
+
+                <div class="entry-highlight">
+                    ⚡ Мой портативный электромагнитный датчик начал пищать. Показания превышали норму в 40 раз!
+                </div>
+
+                <div class="entry-content">
+                    Когда я приложила датчик к главной колоннаде, я увидела невероятное: <strong>внутри колонны горел голубой свет</strong>. Не отражение солнца — свет исходит изнутри камня, как если бы колонна содержала ядро из светящихся кристаллов.
+                </div>
+
+                <div class="entry-highlight">
+                    Когда солнце заходило, свет внутри колонн становился ЯРЧЕ, а не слабее. Ночь активировала источник энергии.
+                </div>
+            </div>
+
+            <!-- ДЕНЬ 2 -->
+            <div class="diary-entry">
+                <div class="entry-date">🔍 ДЕНЬ 2 | 16 июня 2024</div>
+                <div class="entry-time">08:00-17:00 — Анализ структуры</div>
+
+                <div class="entry-content">
+                    Вернулась с полным оборудованием: спектрометр, сканер, термальная камера. Провела микросканирование колонны.
+                </div>
+
+                <div class="measurement">
+                    РЕЗУЛЬТАТЫ АНАЛИЗА КОЛОННЫ №1:<br/>
+                    ✓ Внешний слой: Гранит, возраст ~2,300 лет<br/>
+                    ✓ Средний слой: Неизвестный кристаллический материал<br/>
+                    ✓ Ядро: Чистый кварц (давление/температура невозможны на Земле)
+                </div>
+
+                <div class="critical-moment">
+                    <div class="moment-title">🚨 КРИТИЧЕСКОЕ ОТКРЫТИЕ</div>
+                    <div class="entry-content">
+                        Частота колебаний кристаллов: <strong>7.83 Герца</strong><br/>
+                        Это точная частота волн Шумана (Земли) и альфа-волн мозга человека!
+                    </div>
+                </div>
+
+                <div class="entry-quote">
+                    "Эта колонна была построена не человеком в классическом смысле, или построена человеком с использованием инопланетной технологии."
+                </div>
+            </div>
+
+            <!-- ДЕНЬ 3 -->
+            <div class="diary-entry">
+                <div class="entry-date">⚡ ДЕНЬ 3 | 17 июня 2024</div>
+                <div class="entry-time">06:00-22:00 — Электромагнитная сеть</div>
+
+                <div class="entry-content">
+                    Спала только 2 часа. Ночью вернулась к храму одна и расставила 8 датчиков электромагнитного поля в октаграм (восьмиугольник).
+                </div>
+
+                <div class="critical-moment">
+                    <div class="moment-title">✨ ЭНЕРГЕТИЧЕСКАЯ СИСТЕМА АКТИВНА</div>
+                    <div class="entry-content">
+                        Датчики показали циркулирующую энергию между колоннами! Голубые линии электромагнитной энергии текли как кровь в сосудах.<br/><br/>
+                        <strong>ХРАМ БЫЛА ЖИВОЙ СИСТЕМОЙ!</strong>
+                    </div>
+                </div>
+
+                <div class="entry-highlight">
+                    Энергетические потоки идут в трёх направлениях:<br/>
+                    1️⃣ Вверх — к Сириусу<br/>
+                    2️⃣ Вниз — 60-70 метров под остров<br/>
+                    3️⃣ Наружу — вдоль Нила к другим храмам
+                </div>
+            </div>
+
+            <!-- ДЕНЬ 4 -->
+            <div class="diary-entry">
+                <div class="entry-date">🕳️ ДЕНЬ 4 | 18 июня 2024</div>
+                <div class="entry-time">23:00-04:00 — Глубины под землёй</div>
+
+                <div class="entry-content">
+                    Использовала эхолот для сканирования. Под главным алтарём на глубине 67-70 метров находится <strong>огромная полость</strong>.
+                </div>
+
+                <div class="measurement">
+                    МРТ-СКАНИРОВАНИЕ ПОДЗЕМНОЙ КОМНАТЫ:<br/>
+                    • Форма: идеальный куб 20×20×20 метров<br/>
+                    • Стены: иероглифы и звёздные карты<br/>
+                    • Центр: большой объект (саркофаг или батарея)<br/>
+                    • Излучение: 7.83 Герца (частота сознания!)
+                </div>
+
+                <div class="entry-highlight">
+                    "Это невозможно," — прошептала я. Но сканер не лгал.
+                </div>
+            </div>
+
+            <!-- ДЕНЬ 5 -->
+            <div class="diary-entry">
+                <div class="entry-date">👑 ДЕНЬ 5 | 19 июня 2024</div>
+                <div class="entry-time">10:00-18:00 — Тайна королевы</div>
+
+                <div class="entry-content">
+                    Начала копировать иероглифы. Нашла текст о Клеопатре VII, но не то, что я ожидала...
+                </div>
+
+                <div class="entry-quote">
+                    "Царица спит в священном святилище, между жизнью и смертью. Её дух охраняет врата между мирами. Когда Сириус восстанет, она пробудится и вернёт нам знания предков."
+                </div>
+
+                <div class="critical-moment">
+                    <div class="moment-title">🔮 ПОТЕРЯ ПАМЯТИ ИСТОРИИ</div>
+                    <div class="entry-content">
+                        История говорит, что Клеопатра похоронена в Александрии. Но её тело НИКОГДА не было найдено. Найденный текст говорит, что она передана жрецам Исиды для хранения.
+                    </div>
+                </div>
+
+                <div class="entry-highlight">
+                    <strong>Клеопатра не мертва. Она консервирована и ждёт правильного момента для пробуждения.</strong>
+                </div>
+            </div>
+
+            <!-- ДЕНЬ 6 -->
+            <div class="diary-entry">
+                <div class="entry-date">🌊 ДЕНЬ 6 | 20 июня 2024</div>
+                <div class="entry-time">19:00-23:59 — Магия Нила</div>
+
+                <div class="entry-content">
+                    На закате спустилась к реке с анализаторами. Хотела проверить: совпадает ли частота воды с частотой колонн?
+                </div>
+
+                <div class="measurement">
+                    РЕЗУЛЬТАТ: ТОЧНОЕ СОВПАДЕНИЕ — 7.83 Герца<br/>
+                    Через тепловизор: вода светилась и генерировала тепло!
+                </div>
+
+                <div class="critical-moment">
+                    <div class="moment-title">💎 ВОДА СОДЕРЖИТ КРИСТАЛЛЫ</div>
+                    <div class="entry-content">
+                        Под микроскопом: в воде плавали микроскопические кристаллы. Они двигались упорядоченно, образуя геометрические паттерны (треугольники, пирамиды, звёзды).
+                    </div>
+                </div>
+
+                <div class="entry-quote">
+                    "Вода Нила — это жидкая версия колонн. Это живая компьютерная система, заключённая в воду. Жрецы научили воду петь и передавать сообщения."
+                </div>
+            </div>
+
+            <!-- ДЕНЬ 7 - ЛЕТНЕЕ СОЛНЦЕСТОЯНИЕ -->
+            <div class="diary-entry">
+                <div class="entry-date">✨ ДЕНЬ 7 | 21 июня 2024 (ЛЕТНЕЕ СОЛНЦЕСТОЯНИЕ)</div>
+                <div class="entry-time">21:00-04:30 — ВРАТА ОТКРЫВАЮТСЯ</div>
+
+                <div class="entry-content">
+                    Этот день произойдёт что-то невероятное. Я готовилась давно. Расставила все датчики. Включила все камеры.
+                </div>
+
+                <div class="critical-moment">
+                    <div class="moment-title">⏰ ХРОНОЛОГИЯ ПРОБУЖДЕНИЯ</div>
+                    <div class="timeline-event">
+                        <div class="timeline-time">23:44</div>
+                        <div class="timeline-desc">Колонны начинают светиться ярче. Голубой свет распространяется волной по всему острову.</div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-time">00:11</div>
+                        <div class="timeline-desc">Воздух становится плотнее. Я вижу голографические образы жрецов, танцующих между колоннами.</div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-time">00:33</div>
+                        <div class="timeline-desc">Я слышу музыку кристаллов. Каждый кристалл вибрирует с идеальной гармонией.</div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-time">01:44</div>
+                        <div class="timeline-desc">НИЛ ЗАМЕРЗАЕТ. Вода превращается в чистый прозрачный лёд со звёздными картами. ТО НЕВОЗМОЖНО!</div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-time">02:22</div>
+                        <div class="timeline-desc">Я вижу её. Клеопатра. Её глаза открылись и посмотрели прямо на меня. Её взгляд пронзает все миры.</div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-time">02:33</div>
+                        <div class="timeline-desc">Видение исчезает. Королева закрывает глаза и растворяется в свете.</div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-time">03:33</div>
+                        <div class="timeline-desc">Всё стихает. Храм возвращается в норму. Но я не норм...</div>
+                    </div>
+                </div>
+
+                <div class="entry-highlight">
+                    <strong>ВСПОМНИЛА ПРОШЛУЮ ЖИЗНЬ:</strong> Я была жрицей Исиды 2,300 лет назад. Я служила в этом храме. Я помогала королеве подготовиться к консервации. Я вернулась как исследователь.
+                </div>
+            </div>
+
+            <!-- ДЕНЬ 8 -->
+            <div class="diary-entry">
+                <div class="entry-date">🌟 ДЕНЬ 8 | 22 июня 2024</div>
+                <div class="entry-time">10:00 — Истина</div>
+
+                <div class="entry-content">
+                    Сидела в отеле, не в состоянии двигаться. У меня есть доказательства: все видео, фото, измерения. Но я знаю, что мир не поверит.
+                </div>
+
+                <div class="critical-moment">
+                    <div class="moment-title">🔑 ЧТО ТАКОЕ ХРАМ ФИЛЕ НА САМОМ ДЕЛЕ</div>
+                    <div class="entry-content">
+                        1️⃣ Энергетический портал между мирами<br/>
+                        2️⃣ Древняя компьютерная система из кристаллов и магии<br/>
+                        3️⃣ Мавзолей королевы между жизнью и смертью<br/>
+                        4️⃣ Астрономическая обсерватория Сириуса<br/>
+                        5️⃣ Школа для развития сверхъестественных способностей
+                    </div>
+                </div>
+
+                <div class="entry-highlight">
+                    Я знаю, что скоро произойдёт. Все древние храмы Египта проснутся одновременно. Вернутся те, кто создал эту систему. Люди вспомнят, кто они на самом деле.
+                </div>
+            </div>
+
+            <!-- ЭПИЛОГ -->
+            <div class="diary-entry">
+                <div class="entry-date">📡 ЭПИЛОГ | 15 сентября 2024</div>
+                <div class="entry-time">Лаборатория в Каире — Послание из космоса</div>
+
+                <div class="entry-content">
+                    Обрабатывала данные датчика, оставленного в храме. Он передал сигнал. Это была последовательность: математические константы, звёздные координаты, последовательности ДНК и сообщение на древнеегипетском.
+                </div>
+
+                <div class="entry-quote">
+                    "Мы видели твой поиск. Ты пробудилась. Вскоре другие пробудятся тоже. Приготовь их. Врата откроются, когда Сириус восстанет. Мы возвращаемся домой. — Создатели"
+                </div>
+
+                <div class="entry-highlight">
+                    Это был голос из прошлого. Или из будущего. Или из другого измерения. Но это был голос ИСТИНЫ.
+                </div>
+
+                <div class="entry-content">
+                    Я продолжу исследования. Я буду раскрывать тайны один за другим. И я буду писать историю, которую человечество должно услышать.
+                </div>
+
+                <div class="entry-quote">
+                    Храм Филе — это не памятник древности. Это послание в будущее.
+                </div>
+
+                <div class="signature">
+                    <div class="signature-name">Амира Хасан, Ph.D.</div>
+                    <div>Исследователь древних цивилизаций</div>
+                    <div style="margin-top: 5px; font-size: 12px;">Каир, сентябрь 2024</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-text">✨ Свидетельства, записанные в этом дневнике, представляют истинные события, произошедшие на острове Филе в июне-сентябре 2024 года ✨</div>
+            <div class="footer-text">Все измерения и наблюдения задокументированы и хранятся в защищённых архивах</div>
+            <div class="footer-text" style="margin-top: 20px; font-style: italic;">🏛️ 👽 🌟 💫 ✨</div>
+        </div>
+    </div>
+</body>
+</html>

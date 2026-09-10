@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egypt Mysteries Slideshow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .slideshow-container {
+            max-width: 1200px;
+            width: 100%;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .slides {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: #d4af37;
+            padding: 40px 30px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(20, 10, 40, 0.8);
+            border-top: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        button {
+            background: #d4af37;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #f0e68c;
+            transform: scale(1.05);
+        }
+
+        .slide-counter {
+            color: #d4af37;
+            font-size: 18px;
+            font-weight: bold;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .dots {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #d4af37;
+        }
+
+        .dot.active {
+            background: #d4af37;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .slide-title {
+                font-size: 16px;
+                padding: 30px 20px 15px;
+            }
+
+            button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .slide-counter {
+                font-size: 14px;
+                min-width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <div class="slides">
+            <!-- Slide 1: Aliens Built Pyramids -->
+            <div class="slide active">
+                <img src="https://images.unsplash.com/photo-1552826881-824585040baf?w=1200" alt="How Aliens Built Pyramids">
+                <div class="slide-title">
+                    HOW ALIENS BUILT THE PYRAMIDS<br>
+                    <span style="font-size: 18px; font-weight: normal;">Annunaki from Sirius: Advanced Construction Technology</span>
+                </div>
+            </div>
+
+            <!-- Slide 2: Temple of Philae -->
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1590080876-dde846f4a0aa?w=1200" alt="Temple of Philae">
+                <div class="slide-title">
+                    TEMPLE OF PHILAE<br>
+                    <span style="font-size: 18px; font-weight: normal;">Discovery of Mystical Artifacts - 6 Instruments Exceeding Their Time</span>
+                </div>
+            </div>
+
+            <!-- Slide 3: Sphinx Discovery -->
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1571899340144-53f7bae76b97?w=1200" alt="Sphinx Underground Chamber">
+                <div class="slide-title">
+                    SPHINX UNDERGROUND DISCOVERY<br>
+                    <span style="font-size: 18px; font-weight: normal;">Professor Amira discovers hidden chamber with glowing blue crystals</span>
+                </div>
+            </div>
+
+            <!-- Slide 4: Saqqara Royal Burials -->
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1570673183621-cb9cdcd5bcc3?w=1200" alt="Saqqara Royal Burials">
+                <div class="slide-title">
+                    SAQQARA: ROYAL BURIALS<br>
+                    <span style="font-size: 18px; font-weight: normal;">White Limestone Sarcophagi - Queens with Golden Scarab Amulets</span>
+                </div>
+            </div>
+
+            <!-- Slide 5: Eternal Secrets -->
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1552826881-824585040baf?w=1200" alt="Eternal Secrets">
+                <div class="slide-title">
+                    THE ETERNAL SECRETS OF EGYPT<br>
+                    <span style="font-size: 18px; font-weight: normal;">All the truth will remain forever hidden beneath the sands</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="previousSlide()">← PREVIOUS</button>
+            <div class="dots" id="dotsContainer"></div>
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+            </div>
+            <button onclick="nextSlide()">NEXT →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Create dots
+        const dotsContainer = document.getElementById('dotsContainer');
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+
+            slides[n].classList.add('active');
+            document.querySelectorAll('.dot')[n].classList.add('active');
+            document.getElementById('currentSlide').textContent = n + 1;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
